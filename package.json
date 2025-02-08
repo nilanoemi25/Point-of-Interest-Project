@@ -1,0 +1,14 @@
+{
+  "name": "point-of-interest-project",
+  "version": "1.0.0",
+  "description": "assignment1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "point-of-interest"
+  ],
+  "author": "Noemi Lovei",
+  "license": "ISC"
+}
