@@ -1,4 +1,5 @@
 import { v4 } from "uuid";
+import { poiMemStore } from "./poi-mem-store.js";
 
 let categories = [];
 
@@ -26,6 +27,8 @@ export const categoryMemStore = {
     if (list === undefined) 
     {
       list = null; 
+    } else {
+      list.pois = await poiMemStore.getPoisByCategoryId(list._id);
     } 
     return list;
   },
