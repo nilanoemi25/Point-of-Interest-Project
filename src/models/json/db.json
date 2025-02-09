@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "firstName": "Noemi",
+      "lastName": "Lovei",
+      "email": "gopika.noemi@gmail.com",
+      "password": "1",
+      "_id": "348a4dbd-1819-4923-a18d-92853c31f1b9"
+    }
+  ],
+  "categories": [
+    {
+      "userid": "348a4dbd-1819-4923-a18d-92853c31f1b9",
+      "name": "d",
+      "_id": "28feecaf-5d4c-459c-9dc1-6a04aec731dc"
+    }
+  ],
+  "pois": [
+    {
+      "name": "2",
+      "description": "2",
+      "location": 2222,
+      "image": "",
+      "_id": "67859070-8200-4450-bece-0b403282244c",
+      "categoryid": "28feecaf-5d4c-459c-9dc1-6a04aec731dc"
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import { db } from "../models/db.js";
+import { PoiSpec } from "../models/joi-schemas.js";
 
 export const categoriesController = {
   index: {
@@ -13,6 +14,13 @@ export const categoriesController = {
   },
 
   addPoi: {
+    validate: {
+      payload: PoiSpec,
+      options: { abortEarly: false },
+      failAction: function (request, h, error) {
+        return h.view("poi-view", { title: "Add track error", errors: error.details }).takeover().code(400);
+      },
+    },
     handler: async function (request, h) {
       const category = await db.categoryStore.getCategoryById(request.params.id);
       const newPoi = {
