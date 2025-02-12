@@ -33,7 +33,7 @@ suite("Category Model tests", () => {
     assert.equal(categoryCastle, category);
   });
 
-  test("delete One Playist - success", async () => {
+  test("delete One Category - success", async () => {
     const id = testPois[0]._id;
     await db.categoryStore.deleteCategoryById(id);
     const returnedCategories = await db.categoryStore.getAllCategories();
