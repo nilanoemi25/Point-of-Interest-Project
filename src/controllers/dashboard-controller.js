@@ -5,7 +5,8 @@ export const dashboardController = {
   index: {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
-      const categories = await db.categoryStore.getUserCategories(loggedInUser._id);
+      console.log(loggedInUser)
+      const categories = await db.categoryStore?.getUserCategories(loggedInUser._id);
       const viewData = {
         title: "Point of Interest Dashboard",
         user: loggedInUser, 
@@ -20,7 +21,7 @@ export const dashboardController = {
         payload: CategorySpec,
         options: { abortEarly: false },
         failAction: function (request, h, error) {
-          return h.view("dashboard-view", { title: "Add Playlist error", errors: error.details }).takeover().code(400);
+          return h.view("dashboard-view", { title: "Add Category error", errors: error.details }).takeover().code(400);
         },
       },
       handler: async function (request, h) {
