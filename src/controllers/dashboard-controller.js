@@ -5,7 +5,6 @@ export const dashboardController = {
   index: {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
-      console.log(loggedInUser)
       const categories = await db.categoryStore?.getUserCategories(loggedInUser._id);
       const viewData = {
         title: "Point of Interest Dashboard",
@@ -40,6 +39,36 @@ export const dashboardController = {
       const category = await db.categoryStore.getCategoryById(request.params.id);
       await db.categoryStore.deleteCategoryById(category._id);
       return h.redirect("/dashboard");
+    },
+  },
+
+  admin: {
+    handler: async function (request, h) {
+      const loggedInUser = request.auth.credentials;
+      const allUsers = await db.userStore.getAllUsers();
+      const viewData = {
+        title: "Admin Page",
+        user: loggedInUser, 
+        allUsers: allUsers,
+      
+      };
+      return h.view("admin-view", viewData);
+    },
+  },
+  adminDelete: {
+    handler: async function (request, h) {
+      const loggedInUser = request.auth.credentials;
+      const { email } = request.payload;
+      const user = await db.userStore.getUserByEmail(email);
+      const id = user._id;
+      const deletedUser = await db.userStore.deleteUserById(id);
+      console.log(deletedUser);
+      const viewData = {
+        title: "Admin Page",
+        user: loggedInUser, 
+        deletedUser: deletedUser,
+      };
+      return h.view("admin-view", viewData);
     },
   },
 

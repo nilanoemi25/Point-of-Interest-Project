@@ -1,0 +1,33 @@
+<table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th>FName</th>
+      <th>LName</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each allUsers}}
+      <tr>
+        <td>
+          {{firstName}}
+        </td>
+        <td>
+          {{lastName}}
+        </td>
+        <td>
+          {{email}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<form action="/admin/delete" method="POST">
+   <div class="field">
+      <label class="label">To delete a user type in their email address </label> <input class="input" type="text" placeholder="Enter email" name="email">
+    </div>
+    <div class="field is-grouped">
+      <button class="button is-link">Submit</button>
+    </div>
+</form>

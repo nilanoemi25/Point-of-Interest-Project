@@ -29,6 +29,17 @@ export const maggie = {
   export const categoryCastle = {
     name: "Castle"
   };
+
+  export const categoryHotel = {
+    name: "Hotel"
+  };
+
+  export const singlePoi = {
+    name: "River Lee Hotel",
+    description: "By the river Lee",
+    location: "Munster",
+    image: "nah.jpeg"
+  }
   
   export const testPois = [
     {
@@ -51,3 +62,5 @@ export const maggie = {
     },
    
   ];
+
+  export const serviceUrl = "http://localhost:3000";

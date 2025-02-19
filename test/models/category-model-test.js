@@ -1,6 +1,6 @@
 import { assert } from "chai";
-import { db } from "../src/models/db.js";
-import { testPois, categoryCastle } from "./fixtures.js";
+import { db } from "../../src/models/db.js";
+import { testPois, categoryCastle } from "../fixtures.js";
 
 suite("Category Model tests", () => {
 

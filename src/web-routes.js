@@ -12,6 +12,8 @@ export const webRoutes = [
   { method: "POST", path: "/authenticate", config: accountsController.login },
 
   { method: "GET", path: "/dashboard", config: dashboardController.index },
+  { method: "GET", path: "/admin", config: dashboardController.admin },
+  { method: "POST", path: "/admin/delete", config: dashboardController.adminDelete },
   { method: "POST", path: "/dashboard/addcategory", config: dashboardController.addCategory},
   { method: "GET", path: "/category/{id}", config: categoriesController.index },
   { method: "POST", path: "/category/{id}/addpoi", config: categoriesController.addPoi },

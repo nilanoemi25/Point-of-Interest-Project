@@ -9,9 +9,10 @@
   "scripts": {
     "start": "node src/server.js",
     "lint": "./node_modules/.bin/eslint . --ext .js",
-    "test": "mocha --ui tdd test/**.js -exit"
+    "test": "mocha --ui tdd test/**/*.js -exit"
   },
   "devDependencies": {
+    "axios": "^1.7.9",
     "chai": "^5.1.2",
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -21,6 +22,7 @@
     "prettier": "^3.4.2"
   },
   "dependencies": {
+    "@hapi/boom": "^10.0.1",
     "@hapi/cookie": "^12.0.1",
     "@hapi/hapi": "^21.3.12",
     "@hapi/vision": "^7.0.3",
