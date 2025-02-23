@@ -45,11 +45,21 @@ export const dashboardController = {
   admin: {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
-      const allUsers = await db.userStore.getAllUsers();
+      const { email } = loggedInUser;
+      const allUsers = await db.userStore.getAdminPrivileges(email);
+      let accessString;
+      if(allUsers != null){
+        accessString = "Admin Acces"
+      }
+      else{
+        accessString = "Access Denied"
+      }
+      // const allUsers = await db.userStore.getAllUsers();
       const viewData = {
         title: "Admin Page",
         user: loggedInUser, 
         allUsers: allUsers,
+        accessString: accessString,
       
       };
       return h.view("admin-view", viewData);
@@ -59,14 +69,14 @@ export const dashboardController = {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
       const { email } = request.payload;
-      const user = await db.userStore.getUserByEmail(email);
-      const id = user._id;
-      const deletedUser = await db.userStore.deleteUserById(id);
-      console.log(deletedUser);
+      const tobedeleteduser = await db.userStore.getUserByEmail(email);
+      const id = tobedeleteduser._id;
+      await db.userStore.deleteUserById(id);
+      const refreshUsers = await db.userStore.getAllUsers();
       const viewData = {
         title: "Admin Page",
         user: loggedInUser, 
-        deletedUser: deletedUser,
+        allUsers: refreshUsers,
       };
       return h.view("admin-view", viewData);
     },

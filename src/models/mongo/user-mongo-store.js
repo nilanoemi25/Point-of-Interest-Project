@@ -8,6 +8,15 @@ export const userMongoStore = {
     return users;
   },
 
+  async getAdminPrivileges(email){
+   if(email === "admin@admin.com"){
+      const users = await this.getAllUsers();
+      return users;
+   }
+   return null;
+
+  },
+
   async getUserById(id) {
     if (id) {
       const user = await User.findOne({ _id: id }).lean();
