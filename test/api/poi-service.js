@@ -24,4 +24,28 @@ export const poiService = {
     const res = await axios.delete(`${this.poiUrl}/api/users`);
     return res.data;
   },
+  async createCategory(category) {
+    const res = await axios.post(`${this.poiUrl}/api/categories`, category);
+    return res.data;
+  },
+
+  async deleteAllCategories() {
+    const response = await axios.delete(`${this.poiUrl}/api/categories`);
+    return response.data;
+  },
+
+  async deleteCategory(id) {
+    const response = await axios.delete(`${this.poiUrl}/api/categories/${id}`);
+    return response;
+  },
+
+  async getAllCategories() {
+    const res = await axios.get(`${this.poiUrl}/api/categories`);
+    return res.data;
+  },
+
+  async getCategory(id) {
+    const res = await axios.get(`${this.poiUrl}/api/categories/${id}`);
+    return res.data;
+  },
 };

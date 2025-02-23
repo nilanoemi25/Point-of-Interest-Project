@@ -63,4 +63,10 @@ export const maggie = {
    
   ];
 
+  export const testCategories = [
+    {name: "Hotel"},
+    {name: "Castle"}
+  ]
+
+
   export const serviceUrl = "http://localhost:3000";
