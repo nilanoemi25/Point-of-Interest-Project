@@ -49,7 +49,7 @@ export const dashboardController = {
       const allUsers = await db.userStore.getAdminPrivileges(email);
       let accessString;
       if(allUsers != null){
-        accessString = "Admin Acces"
+        accessString = "Admin Access"
       }
       else{
         accessString = "Access Denied"
