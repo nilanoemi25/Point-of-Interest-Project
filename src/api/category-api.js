@@ -1,5 +1,7 @@
 import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
+import { CategorySpec, IdSpec } from "../models/joi-schemas.js"
+import { validationError } from "./logger.js"
 
 export const categoryApi = {
   find: {
@@ -12,6 +14,11 @@ export const categoryApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+
+    tags: ["api"],
+    description: "Get all categoryApi",
+    notes: "Returns details of all categoryApi",
+    response: { schema: CategorySpec, failAction: validationError},
   },
 
   findOne: {
@@ -27,6 +34,11 @@ export const categoryApi = {
         return Boom.serverUnavailable("No Category with this id");
       }
     },
+    tags: ["api"],
+    description: "Get a specific category",
+    notes: "Returns category details",
+    validate: { params: { id: IdSpec }, failAction: validationError },
+    response: { schema: CategorySpec, failAction: validationError },
   },
 
 
@@ -44,6 +56,7 @@ export const categoryApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+   
   },
 
   deleteOne: {
@@ -60,6 +73,10 @@ export const categoryApi = {
         return Boom.serverUnavailable("No Category with this id");
       }
     },
+    tags: ["api"],
+    description: "Delete one categoryApi",
+    notes: "Delete one category from Poi",
+    response: { schema: CategorySpec, failAction: validationError},
   },
   deleteAll: {
     auth: false,
@@ -72,4 +89,7 @@ export const categoryApi = {
       }
     },
   },
+  tags: ["api"],
+  description: "Delete all categoryApi",
+  notes: "All categoryApi removed from Poi",
 };
