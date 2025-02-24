@@ -1,6 +1,7 @@
+import { connections } from "mongoose";
 import { User } from "./user.js";
+import { userJsonStore } from "../json/user-json-store.js";
 
-// continue from mongoose server 
 
 export const userMongoStore = {
   async getAllUsers() {
@@ -47,5 +48,28 @@ export const userMongoStore = {
 
   async deleteAll() {
     await User.deleteMany({email: {$ne:"admin@admin.com"}});
-  }
+  },
+
+  async suspend(email){
+    let user = await this.getUserByEmail(email);
+    console.log(user); 
+     if(user.status === "active") {
+      const newStatus = "inactive"
+      user = await this.updateUser(user, newStatus)
+
+    }
+    return user; 
+  },
+
+  async updateUser(user, updatedStatus) {
+    console.log(user._id)
+      const SelectedUser = await User.findOne({ _id: user._id }).lean();
+      SelectedUser.firstName = user.firstName;
+      SelectedUser.lastName = user.lastName;
+      SelectedUser.email = user.email; 
+      SelectedUser.password = user.password; 
+      SelectedUser.status = updatedStatus;
+      await SelectedUser.save();
+      return SelectedUser; 
+  },
 };

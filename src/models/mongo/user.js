@@ -7,6 +7,10 @@ const userSchema = new Schema({
   lastName: String,
   email: String,
   password: String,
+  status: {
+    type: String, 
+    default: "active"
+  }
 });
 
 

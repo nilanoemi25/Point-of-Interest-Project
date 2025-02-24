@@ -47,6 +47,7 @@ export const dashboardController = {
       const loggedInUser = request.auth.credentials;
       const { email } = loggedInUser;
       const allUsers = await db.userStore.getAdminPrivileges(email);
+      // console.log(allUsers);
       let accessString;
       if(allUsers != null){
         accessString = "Admin Access"
@@ -54,7 +55,6 @@ export const dashboardController = {
       else{
         accessString = "Access Denied"
       }
-      // const allUsers = await db.userStore.getAllUsers();
       const viewData = {
         title: "Admin Page",
         user: loggedInUser, 
@@ -80,6 +80,20 @@ export const dashboardController = {
       };
       return h.view("admin-view", viewData);
     },
+  },
+
+  suspend: {
+    handler: async function(request, h) {
+    const {email} = request.params;
+    const user = await db.userStore.suspend(email)
+    const refreshUsers = await db.userStore.getAllUsers();
+    const viewData ={
+      title: "Admin Page2",
+      allUsers: refreshUsers,
+    };
+    return h.view("admin-view",viewData)
+    },
+   
   },
 
 };

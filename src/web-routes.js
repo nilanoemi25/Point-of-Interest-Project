@@ -21,4 +21,6 @@ export const webRoutes = [
   { method: "GET", path: "/dashboard/deletecategory/{id}", config: dashboardController.deleteCategory},
   { method: "GET", path: "/category/{id}/deletepoi/{poiid}", config: categoriesController.deletePoi},
 
+  { method: "GET", path: "/dashboard/suspend/{email}", config: dashboardController.suspend},
+
 ];

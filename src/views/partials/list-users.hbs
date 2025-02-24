@@ -22,7 +22,12 @@
           {{email}}
         </td>
         <td>
-          Registered User
+          {{status}}
+        </td>
+        <td>
+          <a href="/dashboard/suspend/{{email}}" class="button">
+            <i class="fas fa-trash"></i>
+         </a>
         </td>
       </tr>
     {{/each}}
