@@ -8,14 +8,17 @@ suite("Poi API tests", () => {
   let majorCategory = null;
 
   setup(async () => {
-    await poiService.deleteAllCategories();
-    await poiService.deleteAllUsers();
-    await poiService.deleteAllPois();
+    poiService.clearAuth();
     user = await poiService.createUser(maggie);
-    categoryHotel.userid = user._id;
-    majorCategory = await poiService.createPlaylist(categoryHotel);
+    await poiService.authenticate(maggie);
+    await poiService.deleteAllCategories();
+    await poiService.deleteAllTracks();
+    await poiService.deleteAllUsers();
+    user = await poiService.createUser(maggie);
+    await poiService.authenticate(maggie);
+    majorCategory.userid = user._id;
+    majorCategory = await poiService.createCategory(categoryHotel);
   });
-
   teardown(async () => {});
 
   test("create poi", async () => {
@@ -52,15 +55,15 @@ suite("Poi API tests", () => {
     assert.equal(returnedPois.length, 0);
   });
 
-  test("denormalised playlist", async () => {
+  test("denormalised category", async () => {
     for (let i = 0; i < testPois.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
       await poiService.createPoi(majorCategory._id, testPois[i]);
     }
-    const returnedPlaylist = await poiService.getPlaylist(majorCategory._id);
-    assert.equal(returnedPlaylist.pois.length, testPois.length);
+    const returnedCategory = await poiService.getCategory(majorCategory._id);
+    assert.equal(returnedCategory.pois.length, testPois.length);
     for (let i = 0; i < testPois.length; i += 1) {
-      assertSubset(testPois[i], returnedPlaylist.pois[i]);
+      assertSubset(testPois[i], returnedCategory.pois[i]);
     }
   });
 });

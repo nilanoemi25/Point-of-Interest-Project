@@ -2,24 +2,27 @@ import Joi from "joi";
 
 export const IdSpec = Joi.alternatives().try(Joi.string(), Joi.object()).description("a valid ID");
 
-export const UserSpec = Joi.object()
-  .keys({
+
+export const UserCredentialsSpec = Joi.object() 
+.keys({
+  email: Joi.string().email().example("homer@simpson.com").required(),
+  password: Joi.string().example("secret").required(),
+})
+.label("UserCredentials");
+
+export const UserSpec = UserCredentialsSpec.keys({
     firstName: Joi.string().example("Homer").required(),
     lastName: Joi.string().example("Simpson").required(),
-    email: Joi.string().email().example("homer@simpson.com").required(),
-    password: Joi.string().example("secret").required(),
-    _id: IdSpec,
-    __v: Joi.number(),
+    status: Joi.string().example("active").optional(),
   })
   .label("UserDetails");
 
+export const UserSpecPlus = UserSpec.keys({
+  _id: IdSpec,
+  __v: Joi.number(),
+}).label("UserDetailsPlus");
+
 export const UserArray = Joi.array().items(UserSpec).label("UserArray");
-
-
-export const UserCredentialsSpec = {
-  email: Joi.string().email().required(),
-  password: Joi.string().required(),
-};
 
 export const PoiSpec = Joi.object()
 .keys({
@@ -27,16 +30,28 @@ export const PoiSpec = Joi.object()
   description: Joi.string().example("Big rock building").required(),
   location: Joi.number().example("Cork").allow("").optional(),
   image: Joi.string().allow("").optional(),
-  _id: IdSpec,
-  __v: Joi.number(),
+  CategoryId: IdSpec, 
 })
 .label("PoiDetails");
 
-
-export const CategorySpec = Joi.object()
-.keys({
-  title: Joi.string().example("CategoryName").required(),
+export const PoiSpecPlus = PoiSpec.keys({
   _id: IdSpec,
   __v: Joi.number(),
-})
-.label("CategoryDetails");
+}).label("PoiPlus");
+
+export const PoiArraySpec = Joi.array().items(PoiSpecPlus).label("PoiArray");
+
+export const CategorySpec = Joi.object()
+  .keys({
+    name: Joi.string().required().example("Hotels"),
+    userid: IdSpec,
+    pois: PoiArraySpec,
+  })
+  .label("Category");
+
+export const CategorySpecPlus = CategorySpec.keys({
+  _id: IdSpec,
+  __v: Joi.number(),
+}).label("CategoryPlus");
+
+export const CategoryArraySpec = Joi.array().items(CategorySpecPlus).label("CategoryArray");

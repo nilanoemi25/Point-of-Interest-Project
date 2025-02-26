@@ -1,12 +1,13 @@
 import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
-import { PoiSpec, IdSpec } from "../models/joi-schemas.js"
-import { validationError } from "./logger.js"
-
+import { IdSpec, PoiSpec, PoiSpecPlus, PoiArraySpec } from "../models/joi-schemas.js";
+import { validationError } from "./logger.js";
 
 export const poiApi = {
   find: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const pois = await db.poiStore.getAllPois();
@@ -16,13 +17,15 @@ export const poiApi = {
       }
     },
     tags: ["api"],
+    response: { schema: PoiArraySpec, failAction: validationError },
     description: "Get all poiApi",
-    notes: "Returns details of all poiApi",
-    response: { schema: PoiSpec, failAction: validationError},
+    notes: "Returns all poiApi",
   },
 
   findOne: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     async handler(request) {
       try {
         const poi = await db.poiStore.getPoiById(request.params.id);
@@ -34,15 +37,17 @@ export const poiApi = {
         return Boom.serverUnavailable("No poi with this id");
       }
     },
-        tags: ["api"],
-        description: "Get a specific poi",
-        notes: "Returns poi details",
-        validate: { params: { id: IdSpec }, failAction: validationError },
-        response: { schema: CategorySpec, failAction: validationError },
+    tags: ["api"],
+    description: "Find a Poi",
+    notes: "Returns a poi",
+    validate: { params: { id: IdSpec }, failAction: validationError },
+    response: { schema: PoiSpecPlus, failAction: validationError },
   },
 
   create: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const poi = await db.poiStore.addPoi(request.params.id, request.payload);
@@ -54,15 +59,17 @@ export const poiApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
-       tags: ["api"],
-        description: "Create a poi",
-        notes: "Returns the newly created poi",
-        validate: { params: { id: IdSpec }, failAction: validationError },
-        response: { schema: CategorySpec, failAction: validationError },
+    tags: ["api"],
+    description: "Create a poi",
+    notes: "Returns the newly created poi",
+    validate: { payload: PoiSpec },
+    response: { schema: PoiSpecPlus, failAction: validationError },
   },
 
   deleteAll: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         await db.poiStore.deleteAllPois();
@@ -73,11 +80,12 @@ export const poiApi = {
     },
     tags: ["api"],
     description: "Delete all poiApi",
-    notes: "All poiApi removed from Poi",
   },
 
   deleteOne: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const poi = await db.poiStore.getPoiById(request.params.id);
@@ -91,8 +99,7 @@ export const poiApi = {
       }
     },
     tags: ["api"],
-    description: "Delete one poiApi",
-    notes: "Delete one poi from Poi",
-    response: { schema: PoiSpec, failAction: validationError},
+    description: "Delete a poi",
+    validate: { params: { id: IdSpec }, failAction: validationError },
   },
 };

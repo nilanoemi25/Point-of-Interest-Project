@@ -10,12 +10,13 @@ suite("Category API tests", () => {
 
     let user = null; 
 
-  setup(async () => {
-    await poiService.deleteAllCategories();
-    await poiService.deleteAllUsers();
-    user = await poiService.createUser(maggie);
-    categoryHotel.userid = user._id;
-  });
+    setup(async () => {
+      await poiService.deleteAllCategories();
+      await poiService.deleteAllUsers();
+      user = await poiService.createUser(maggie);
+      await poiService.authenticate(maggie);
+      categoryHotel.userid = user._id;
+    });
 
   teardown(async () => {});
 

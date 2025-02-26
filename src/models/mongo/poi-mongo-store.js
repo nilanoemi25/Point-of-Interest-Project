@@ -41,9 +41,9 @@ export const poiMongoStore = {
 
   async updatePoi(poi, updatedPoi) {
     const poiDoc = await Poi.findOne({ _id: poi._id });
-    poiDoc.title = updatedPoi.title;
-    poiDoc.artist = updatedPoi.artist;
-    poiDoc.duration = updatedPoi.duration;
+    poiDoc.name = updatedPoi.name;
+    poiDoc.description = updatedPoi.description;
+    poiDoc.location = updatedPoi.location;
     await poiDoc.save();
   },
 };

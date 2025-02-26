@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import { db } from "../../src/models/db.js";
-import { categoryHotel, singlePoi, testPois, testUsers } from "../fixtures.js";
+import { categoryHotel, singlePoi, testPois, testUsers, testCategories } from "../fixtures.js";
 import { assertSubset } from "../test-utils.js";
 
 suite("Poi Model tests", () => {

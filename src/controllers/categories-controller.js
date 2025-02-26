@@ -18,7 +18,7 @@ export const categoriesController = {
       payload: PoiSpec,
       options: { abortEarly: false },
       failAction: function (request, h, error) {
-        return h.view("poi-view", { title: "Add track error", errors: error.details }).takeover().code(400);
+        return h.view("poi-view", { title: "Add poi error", errors: error.details }).takeover().code(400);
       },
     },
     handler: async function (request, h) {
@@ -26,7 +26,7 @@ export const categoriesController = {
       const newPoi = {
         name: request.payload.name,
         description: request.payload.description,
-        location: request.payload.location,
+        location: Number(request.payload.location),
         image: request.payload.image,
       };
       await db.poiStore.addPoi(category._id, newPoi);
