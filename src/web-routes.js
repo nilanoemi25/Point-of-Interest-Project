@@ -15,6 +15,11 @@ export const webRoutes = [
   { method: "GET", path: "/admin", config: dashboardController.admin },
   { method: "POST", path: "/admin/delete", config: dashboardController.adminDelete },
   { method: "POST", path: "/dashboard/addcategory", config: dashboardController.addCategory},
+
+  { method: "GET", path: "/discussion", config: dashboardController.discussion },
+  { method: "POST", path: "/discussion/add", config: dashboardController.addComment},
+
+
   { method: "GET", path: "/category/{id}", config: categoriesController.index },
   { method: "POST", path: "/category/{id}/addpoi", config: categoriesController.addPoi },
 

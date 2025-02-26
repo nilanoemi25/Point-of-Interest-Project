@@ -55,3 +55,18 @@ export const CategorySpecPlus = CategorySpec.keys({
 }).label("CategoryPlus");
 
 export const CategoryArraySpec = Joi.array().items(CategorySpecPlus).label("CategoryArray");
+
+export const CommentSpec = Joi.object()
+  .keys({
+    comment: Joi.string().required().example("I liked this"),
+    userid: IdSpec,
+  })
+  .label("Comment");
+
+export const CommentSpecPlus = CommentSpec.keys({
+  _id: IdSpec,
+  __v: Joi.number(),
+}).label("CommentPlus");
+
+export const CommentArraySpec = Joi.array().items(CommentSpecPlus).label("CommentArray");
+

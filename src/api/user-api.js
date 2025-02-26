@@ -1,67 +1,102 @@
-import { assert } from "chai";
-import { assertSubset } from "../test-utils.js";
-import { poiService } from "./poi-service.js";
-import { maggie, testUsers } from "../fixtures.js";
+import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
+import { UserSpec, UserSpecPlus, IdSpec, UserArray } from "../models/joi-schemas.js";
+import { validationError } from "./logger.js";
+import { createToken } from "./jwt-utils.js";
 
-const users = new Array(testUsers.length);
+export const userApi = {
+  authenticate: {
+    auth: false,
+    handler: async function (request, h) {
+      try {
+        const user = await db.userStore.getUserByEmail(request.payload.email);
+        if (!user) {
+          return Boom.unauthorized("User not found");
+        }
+        if (user.password !== request.payload.password) {
+          return Boom.unauthorized("Invalid password");
+        }
+        const token = createToken(user);
+        return h.response({ success: true, token: token }).code(201);
+      } catch (err) {
+        return Boom.serverUnavailable("Database Error");
+      }
+    },
+  },
+  find: {
+    auth: {
+      strategy: "jwt",
+    },
+    handler: async function (request, h) {
+      try {
+        const users = await db.userStore.getAllUsers();
+        return users;
+      } catch (err) {
+        return Boom.serverUnavailable("Database Error");
+      }
+    },
+    tags: ["api"],
+    description: "Get all userApi",
+    notes: "Returns details of all userApi",
+    response: { schema: UserArray, failAction: validationError },
+  },
 
-suite("User API tests", () => {
-  setup(async () => {
-    poiService.clearAuth();
-    await poiService.createUser(maggie);
-    await poiService.authenticate(maggie);
-    await poiService.deleteAllUsers();
-    for (let i = 0; i < testUsers.length; i += 1) {
-      // eslint-disable-next-line no-await-in-loop
-      users[0] = await poiService.createUser(testUsers[i]);
-    }
-    await poiService.createUser(maggie);
-    await poiService.authenticate(maggie);
-  });
-  teardown(async () => {});
+  findOne: {
+    auth: {
+      strategy: "jwt",
+    },
+    handler: async function (request, h) {
+      try {
+        const user = await db.userStore.getUserById(request.params.id);
+        if (!user) {
+          return Boom.notFound("No User with this id");
+        }
+        return user;
+      } catch (err) {
+        return Boom.serverUnavailable("No User with this id");
+      }
+    },
+    tags: ["api"],
+    description: "Get a specific user",
+    notes: "Returns user details",
+    validate: { params: { id: IdSpec }, failAction: validationError },
+    response: { schema: UserSpecPlus, failAction: validationError },
+  },
 
-  test("create a user", async () => {
-    const newUser = await poiService.createUser(maggie);
-    assertSubset(maggie, newUser);
-    assert.isDefined(newUser._id);
-  });
+  create: {
+    auth: false,
+    handler: async function (request, h) {
+      try {
+        const user = await db.userStore.addUser(request.payload);
+        if (user) {
+          return h.response(user).code(201);
+        }
+        return Boom.badImplementation("error creating user");
+      } catch (err) {
+        return Boom.serverUnavailable("Database Error");
+      }
+    },
+    tags: ["api"],
+    description: "Create a User",
+    notes: "Returns the newly created user",
+    validate: { payload: UserSpec, failAction: validationError },
+    response: { schema: UserSpecPlus, failAction: validationError },
+  },
 
-  test("delete all user", async () => {
-    let returnedUsers = await poiService.getAllUsers();
-    assert.equal(returnedUsers.length, 4);
-    await poiService.deleteAllUsers();
-    await poiService.createUser(maggie);
-    await poiService.authenticate(maggie);
-    returnedUsers = await poiService.getAllUsers();
-    assert.equal(returnedUsers.length, 1);
-  });
-
-  test("get a user", async () => {
-    const returnedUser = await poiService.getUser(users[0]._id);
-    assert.deepEqual(users[0], returnedUser);
-  });
-
-  test("get a user - bad id", async () => {
-    try {
-      const returnedUser = await poiService.getUser("1234");
-      assert.fail("Should not return a response");
-    } catch (error) {
-      assert(error.response.data.message === "No User with this id");
-      assert.equal(error.response.data.statusCode, 503);
-    }
-  });
-
-  test("get a user - deleted user", async () => {
-    await poiService.deleteAllUsers();
-    await poiService.createUser(maggie);
-    await poiService.authenticate(maggie);
-    try {
-      const returnedUser = await poiService.getUser(users[0]._id);
-      assert.fail("Should not return a response");
-    } catch (error) {
-      assert(error.response.data.message === "No User with this id");
-      assert.equal(error.response.data.statusCode, 404);
-    }
-  });
-});
+  deleteAll: {
+    auth: {
+      strategy: "jwt",
+    },
+    handler: async function (request, h) {
+      try {
+        await db.userStore.deleteAll();
+        return h.response().code(204);
+      } catch (err) {
+        return Boom.serverUnavailable("Database Error");
+      }
+    },
+    tags: ["api"],
+    description: "Delete all userApi",
+    notes: "All userApi removed from Playtime",
+  },
+};
