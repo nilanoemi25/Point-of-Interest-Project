@@ -3,6 +3,7 @@ export const maggie = {
     lastName: "Simpson",
     email: "maggie@simpson.com",
     password: "secret",
+    status: "active",
   };
   
   export const testUsers = [
@@ -65,7 +66,8 @@ export const maggie = {
 
   export const testCategories = [
     {name: "Hotel"},
-    {name: "Castle"}
+    {name: "Castle"},
+    {name: "River"}
   ]
 
 
