@@ -2,6 +2,8 @@ import { db } from "../models/db.js";
 import { PoiSpec } from "../models/joi-schemas.js";
 import { imageStore } from "../models/image-store.js";
 
+// Testing Git 
+
 export const categoriesController = {
   index: {
     handler: async function (request, h) {
