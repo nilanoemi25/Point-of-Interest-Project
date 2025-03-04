@@ -1,6 +1,7 @@
 import { Category } from "./category.js";
 import { poiMongoStore } from "./poi-mongo-store.js";
 
+
 export const categoryMongoStore = {
   async getAllCategories() {
     const categories = await Category.find().lean();
@@ -41,5 +42,12 @@ export const categoryMongoStore = {
 
   async deleteAllCategories() {
     await Category.deleteMany({});
-  }
+  },
+
+  async updateCategory(updatedCategory) {
+    const category = await Category.findOne({ _id: updatedCategory._id });
+    category.name = updatedCategory.name;
+    category.img = updatedCategory.img;
+    await category.save();
+  },
 };

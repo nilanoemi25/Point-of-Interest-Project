@@ -28,6 +28,8 @@ export const webRoutes = [
 
   { method: "GET", path: "/dashboard/suspend/{email}", config: dashboardController.suspend},
 
+  { method: "POST", path: "/category/{id}/uploadimage", config: categoriesController.uploadImage },
+
   { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } }
 
 ];
