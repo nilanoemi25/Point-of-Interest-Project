@@ -49,12 +49,12 @@ export const userApi = {
   deleteAll: {
     auth: false,
     handler: async function (request, h) {
-      try {
+    //  try {
         await db.userStore.deleteAll();
         return h.response().code(204);
-      } catch (err) {
-        return Boom.serverUnavailable("Database Error");
-      }
+     // } catch (err) {
+     //   return Boom.serverUnavailable("Database Error");
+    //  }
     },
   },
 };
