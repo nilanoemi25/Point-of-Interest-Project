@@ -1,9 +1,21 @@
 {{#each comments}}
   <div class="box box-link-hover-shadow">
-    <h2 class="Comment">
-      {{user.firstName}} says the following: 
-      {{comment}}
-    </h2>
-    </a>
+    <div class="level">
+        <div class="level-left">
+          <div class="level-item">
+              <h2 class="Comment">
+                "{{userid}}" says the following: 
+                {{comment}}
+              </h2>
+            </div>
+        </div>
+        <div class="level-right">
+          <div class="level-item">
+            <a href="/discussion/deletecomment/{{_id}}" class="button">
+              <i class="fas fa-trash"></i>
+            </a>
+          </div>
+        </div>
+      </div>
   </div>
 {{/each}}

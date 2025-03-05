@@ -16,7 +16,7 @@ const users = new Array(testUsers.length);
 //   });
 //   teardown(async () => {});
 
-suite("User API tests", () => {
+suite("User API tests 0", () => {
   setup(async () => {
     poiService.clearAuth();
     await poiService.createUser(maggie);
