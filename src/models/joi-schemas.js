@@ -28,8 +28,8 @@ export const PoiSpec = Joi.object()
 .keys({
   name: Joi.string().example("Castle").required(),
   description: Joi.string().example("Big rock building").required(),
-  location: Joi.number().example("Cork").allow("").optional(),
-  image: Joi.string().allow("").optional(),
+  latitude: Joi.number().example("50.22").allow("").optional(),
+  longitude: Joi.number().example("7.89").allow("").optional(),
   CategoryId: IdSpec, 
 })
 .label("PoiDetails");

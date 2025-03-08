@@ -11,8 +11,20 @@ export const seedData = {
         firstName: "Homer",
         lastName: "Simpson",
         email: "homer@simpson.com",
+        password: "123456"
+      },
+      marge: {
+        firstName: "Marge",
+        lastName: "Simpson",
+        email: "marge@simpson.com",
         password: "secret"
       },
+      bart: {
+        firstName: "Bart",
+        lastName: "Simpson",
+        email: "bart@simpson.com",
+        password: "secret"
+      }
     },
     category: {
       _model: "Category",
@@ -26,8 +38,8 @@ export const seedData = {
       poi_1 : {
         name: "Cork",
         description: "The best city",
-        location: "51.8985",
-        image: " ",
+        latitude: "51.8985",
+        longitude:"8.4756",
         categoryid:"->category.city"
       },
     }

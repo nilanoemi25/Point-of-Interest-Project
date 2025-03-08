@@ -63,7 +63,7 @@ export const userMongoStore = {
 
   async updateUser(user, updatedStatus) {
     console.log(user._id)
-      const SelectedUser = await User.findOne({ _id: user._id }).lean();
+      const SelectedUser = await User.findOne({ _id: user._id });
       SelectedUser.firstName = user.firstName;
       SelectedUser.lastName = user.lastName;
       SelectedUser.email = user.email; 

@@ -29,8 +29,8 @@ export const categoriesController = {
       const newPoi = {
         name: request.payload.name,
         description: request.payload.description,
-        location: Number(request.payload.location),
-        image: request.payload.image,
+        latitude: Number(request.payload.latitude),
+        longitude: Number(request.payload.longitude),
       };
       await db.poiStore.addPoi(category._id, newPoi);
       return h.redirect(`/category/${category._id}`);

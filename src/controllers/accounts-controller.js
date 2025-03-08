@@ -48,7 +48,7 @@ export const accountsController = {
     handler: async function (request, h) {
       const { email, password } = request.payload;
       const user = await db.userStore.getUserByEmail(email);
-      if (!user || user.password !== password) {
+      if (!user || user.password !== password || user.status === "inactive") {
         return h.redirect("/");
       }
       request.cookieAuth.set({ id: user._id });

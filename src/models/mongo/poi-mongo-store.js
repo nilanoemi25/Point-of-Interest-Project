@@ -43,7 +43,8 @@ export const poiMongoStore = {
     const poiDoc = await Poi.findOne({ _id: poi._id });
     poiDoc.name = updatedPoi.name;
     poiDoc.description = updatedPoi.description;
-    poiDoc.location = updatedPoi.location;
+    poiDoc.latitude = updatedPoi.latitude;
+    poiDoc.longitude = updatedPoi.longitude;
     await poiDoc.save();
   },
 };

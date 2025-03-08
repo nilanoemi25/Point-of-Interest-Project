@@ -2,7 +2,7 @@ export const maggie = {
     firstName: "Maggie",
     lastName: "Simpson",
     email: "maggie@simpson.com",
-    password: "secret",
+    password: "123456",
     status: "active",
   };
   
@@ -11,19 +11,19 @@ export const maggie = {
       firstName: "Homer",
       lastName: "Simpson",
       email: "homer@simpson.com",
-      password: "secret",
+      password: "123456",
     },
     {
       firstName: "Marge",
       lastName: "Simpson",
       email: "marge@simpson.com",
-      password: "secret",
+      password: "123456",
     },
     {
       firstName: "Bart",
       lastName: "Simpson",
       email: "bart@simpson.com",
-      password: "secret",
+      password: "123456",
     },
   ];
   
