@@ -18,6 +18,7 @@ export const webRoutes = [
 
   { method: "GET", path: "/discussion", config: dashboardController.discussion },
   { method: "POST", path: "/discussion/add", config: dashboardController.addComment},
+  { method: "GET", path: "/discussion/deletecomment/{id}", config: dashboardController.deleteComment},
 
 
   { method: "GET", path: "/category/{id}", config: categoriesController.index },
@@ -27,6 +28,8 @@ export const webRoutes = [
   { method: "GET", path: "/category/{id}/deletepoi/{poiid}", config: categoriesController.deletePoi},
 
   { method: "GET", path: "/dashboard/suspend/{email}", config: dashboardController.suspend},
+
+  { method: "POST", path: "/category/{id}/uploadimage", config: categoriesController.uploadImage },
 
   { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } }
 

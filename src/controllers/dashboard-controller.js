@@ -57,19 +57,22 @@ export const dashboardController = {
   discussion: {
     handler: async function (request, h) {
      const loggedInUser = request.auth.credentials;
-      const comments = await db.commentStore.getAllComments();
-      // const usersArray =[];
-      // for ( let i =0; i < comments.length; i++){
-      //   const user = db.userStore.getUserById(comments[i].userid)
-      //   usersArray.push(user);
-      // }
-      // console.log(usersArray);
+     const comments = await db.commentStore.getAllComments();
+      console.log(comments)
       const viewData = {
         title: "Discussion Board",
         user: loggedInUser,
         comments: comments, 
       };
       return h.view("discussion-view", viewData);
+    },
+  },
+
+  deleteComment: {
+    handler: async function (request, h) {
+      const comment = await db.commentStore.getCommentById(request.params.id);
+      await db.commentStore.deleteCommentById(comment._id);
+      return h.redirect("/discussion");
     },
   },
 
