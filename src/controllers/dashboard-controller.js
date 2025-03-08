@@ -86,7 +86,6 @@ export const dashboardController = {
       const loggedInUser = request.auth.credentials;
       const { email } = loggedInUser;
       const allUsers = await db.userStore.getAdminPrivileges(email);
-      // console.log(allUsers);
       let accessString;
       if(allUsers != null){
         accessString = "Admin Access"
