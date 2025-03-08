@@ -30,7 +30,7 @@ export const PoiSpec = Joi.object()
   description: Joi.string().example("Big rock building").required(),
   latitude: Joi.number().example("50.22").allow("").optional(),
   longitude: Joi.number().example("7.89").allow("").optional(),
-  CategoryId: IdSpec, 
+  categoryid: IdSpec, 
 })
 .label("PoiDetails");
 

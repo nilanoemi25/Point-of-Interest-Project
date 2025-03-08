@@ -38,28 +38,32 @@ export const maggie = {
   export const singlePoi = {
     name: "River Lee Hotel",
     description: "By the river Lee",
-    location: "Munster",
-    image: "nah.jpeg"
+    latitude: "55",
+    longitude: "222"
+  
   }
   
   export const testPois = [
     {
       name: "Blackrock Castle",
       description: "by Cork",
-      location: "Cork",
-      image: "uploaded.jpeg"
+      latitude: "55",
+      longitude: "222"
+   
     },
     {
       name: "Mallow Castle",
       description: "by Cork",
-      location: "Mallow",
-      image: "uploaded.jpeg"
+      latitude: "55",
+      longitude: "222"
+   
     },
     {
       name: "Midleton Castle",
       description: "by Cork",
-      location: "Midleton",
-      image: "uploaded.jpeg"
+      latitude: "55",
+      longitude: "222"
+  
     },
    
   ];

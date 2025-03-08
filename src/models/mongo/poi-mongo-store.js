@@ -7,8 +7,8 @@ export const poiMongoStore = {
     return pois;
   },
 
-  async addPoi(categoryId, poi) {
-    poi.categoryid = categoryId;
+  async addPoi(categoryid, poi) {
+    poi.categoryid = categoryid;
     const newPoi = new Poi(poi);
     const poiObj = await newPoi.save();
     return this.getPoiById(poiObj._id);

@@ -3,6 +3,7 @@ import { poiService } from "./poi-service.js";
 import { assertSubset } from "../test-utils.js";
 import { maggie, testUsers } from "../fixtures.js";
 
+
 const users = new Array(testUsers.length);
 
 

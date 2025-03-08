@@ -31,5 +31,55 @@ export const poiService = {
   },
   async clearAuth() {
     axios.defaults.headers.common.Authorization = "";
-  }
+  },
+  async createCategory(category) {
+    const res = await axios.post(`${this.poiUrl}/api/categories`, category);
+    return res.data;
+  },
+
+  async deleteAllCategories() {
+    const response = await axios.delete(`${this.poiUrl}/api/categories`);
+    return response.data;
+  },
+
+  async deleteCategory(id) {
+    const response = await axios.delete(`${this.poiUrl}/api/categories/${id}`);
+    return response;
+  },
+
+  async getAllCategories() {
+    const res = await axios.get(`${this.poiUrl}/api/categories`);
+    return res.data;
+  },
+
+  async getCategory(id) {
+    const res = await axios.get(`${this.poiUrl}/api/categories/${id}`);
+    return res.data;
+  },
+
+  async createPoi(id, poi) {
+    const res = await axios.post(`${this.poiUrl}/api/categories/${id}/pois`, poi);
+    return res.data;
+  },
+
+  async deleteAllPois() {
+    const res = await axios.delete(`${this.poiUrl}/api/pois`);
+    return res.data;
+  },
+
+  async getAllPois() {
+    const res = await axios.get(`${this.poiUrl}/api/pois`);
+    return res.data;
+  },
+
+  async getPoi(id) {
+    const res = await axios.get(`${this.poiUrl}/api/pois/${id}`);
+    return res.data;
+  },
+
+  async deletePoi(id) {
+    const response = await axios.delete(`${this.poiUrl}/api/pois/${id}`);
+    return response;
+  },
+
 };

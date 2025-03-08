@@ -1,27 +1,29 @@
 import { assert } from "chai";
 import { assertSubset } from "../test-utils.js";
 import { poiService } from "./poi-service.js";
-import { maggie, categoryHotel, testCategories, testPois, singlePoi } from "../fixtures.js";
+import { maggie, categoryHotel, testCategories, testPois, } from "../fixtures.js";
 
-suite("Poi API tests", () => {
+suite("Poi API tests 0", () => {
   let user = null;
   let majorCategory = null;
 
   setup(async () => {
-    await poiService.deleteAllCategories();
-    await poiService.deleteAllUsers();
-    await poiService.deleteAllPois();
+    poiService.clearAuth();
     user = await poiService.createUser(maggie);
-    categoryHotel.userid = user._id;
+    await poiService.authenticate(maggie);
+    await poiService.deleteAllCategories();
+    await poiService.deleteAllTracks();
+    await poiService.deleteAllUsers();
+    user = await poiService.createUser(maggie);
+    await poiService.authenticate(maggie);
+    majorCategory.userid = user._id;
     majorCategory = await poiService.createCategory(categoryHotel);
   });
-
   teardown(async () => {});
 
-
   test("create poi", async () => {
-    const returnedPoi = await poiService.createPoi(majorCategory._id, singlePoi);
-    assertSubset(singlePoi, returnedPoi);
+    const returnedPoi = await poiService.createPoi(majorCategory._id, categoryHotel);
+    assertSubset(categoryHotel, returnedPoi);
   });
 
   test("create Multiple pois", async () => {
@@ -64,8 +66,4 @@ suite("Poi API tests", () => {
       assertSubset(testPois[i], returnedCategory.pois[i]);
     }
   });
-
-
-
 });
-

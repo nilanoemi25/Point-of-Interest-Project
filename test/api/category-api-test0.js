@@ -6,16 +6,17 @@ import { maggie, categoryHotel, testCategories } from "../fixtures.js"
 
 EventEmitter.setMaxListeners(25);
 
-suite("Category API tests", () => {
+suite("Category API tests 0", () => {
 
-  let user = null;
+    let user = null; 
 
-  setup(async () => {
-    await poiService.deleteAllCategories();
-    await poiService.deleteAllUsers();
-    user = await poiService.createUser(maggie);
-    categoryHotel.userid = user._id;
-  });
+    setup(async () => {
+      await poiService.deleteAllCategories();
+      await poiService.deleteAllUsers();
+      user = await poiService.createUser(maggie);
+      await poiService.authenticate(maggie);
+      categoryHotel.userid = user._id;
+    });
 
   teardown(async () => {});
 
@@ -35,9 +36,10 @@ suite("Category API tests", () => {
     } catch (error) {
       assert(error.response.data.message === "No Category with this id", "Incorrect Response Message");
     }
+
   });
 
-  test("create multiple categories", async () => {
+  test("create multiple Categories", async () => {
     for (let i = 0; i < testCategories.length; i += 1) {
       testCategories[i].userid = user._id;
       // eslint-disable-next-line no-await-in-loop
