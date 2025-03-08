@@ -28,3 +28,4 @@ export const imageStore = {
     await cloudinary.v2.uploader.destroy(img, {});
   }
 };
+ 

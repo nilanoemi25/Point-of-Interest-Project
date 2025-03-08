@@ -1,6 +1,6 @@
 import { db } from "../models/db.js";
 import { PoiSpec } from "../models/joi-schemas.js";
-import { imageStore } from "../models/image-store.js";
+ import { imageStore } from "../models/image-store.js"; 
 
 // Testing Git 
 
