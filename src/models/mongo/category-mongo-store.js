@@ -47,7 +47,7 @@ export const categoryMongoStore = {
   async updateCategory(updatedCategory) {
     const category = await Category.findOne({ _id: updatedCategory._id });
     category.name = updatedCategory.name;
-    category.img = updatedCategory.img;
+   //  category.img = updatedCategory.img;
     await category.save();
   },
 };

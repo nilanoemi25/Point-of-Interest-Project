@@ -89,6 +89,29 @@ export const dashboardController = {
       const loggedInUser = request.auth.credentials;
       const { email } = loggedInUser;
       const allUsers = await db.userStore.getAdminPrivileges(email);
+      const userIdArray = []
+      // eslint-disable-next-line no-plusplus
+      for(let i=0; i < allUsers.length; i++){
+        userIdArray.push(allUsers[i]._id); 
+      }
+     async function countCategories(userid) {
+        // eslint-disable-next-line prefer-const
+        let categoryArray =  await db.categoryStore.getUserCategories(userid); 
+        // eslint-disable-next-line prefer-const
+        let count = await categoryArray.length;
+        // eslint-disable-next-line prefer-template
+      //  console.log("Count: " + count)
+        return count;
+    }
+    
+    const countArray = [];
+   userIdArray.forEach(async userid => {
+        const count = countCategories(userid);
+        countArray.push(userid, count);
+    });
+    
+    console.log(countArray);
+        
       let accessString;
       if(allUsers != null){
         accessString = "Admin Access"
@@ -96,16 +119,22 @@ export const dashboardController = {
       else{
         accessString = "Access Denied"
       }
+
+      console.log(typeof allUsers); // object
+      
+
       const viewData = {
         title: "Admin Page",
         user: loggedInUser, 
         allUsers: allUsers,
         accessString: accessString,
+        count: countArray,
       
       };
       return h.view("admin-view", viewData);
     },
   },
+
   adminDelete: {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
