@@ -42,6 +42,7 @@ async function init() {
   server.validator(Joi);
 
   await server.register(Inert);
+  await server.register(jwt);
   await server.register([
     Inert,
     Vision,
@@ -61,7 +62,7 @@ async function init() {
     validate: accountsController.validate,
   });
   server.auth.default("session");
-  await server.register(jwt);
+ 
   server.auth.strategy("jwt", "jwt", {
     key: process.env.cookie_password,
     validate: validate,
