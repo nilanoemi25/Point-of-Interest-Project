@@ -3,6 +3,7 @@ import { db } from "../models/db.js";
 import { IdSpec, PoiSpec, PoiSpecPlus, PoiArraySpec } from "../models/joi-schemas.js";
 import { validationError } from "./logger.js";
 
+
 export const poiApi = {
   find:  {
     auth: false, // {

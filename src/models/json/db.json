@@ -4,23 +4,23 @@
     {
       "name": "Blackrock Castle",
       "description": "by Cork",
-      "location": "Cork",
-      "image": "uploaded.jpeg",
-      "_id": "7b561c70-5a66-46de-8b58-cce535ec6c29"
+      "latitude": "55",
+      "longitude": "222",
+      "_id": "710fc708-d054-48d6-a826-3c6a91f70e73"
     },
     {
       "name": "Mallow Castle",
       "description": "by Cork",
-      "location": "Mallow",
-      "image": "uploaded.jpeg",
-      "_id": "888145d9-1947-4ef5-a72a-af83e1fc4027"
+      "latitude": "55",
+      "longitude": "222",
+      "_id": "bdb66538-721a-41a2-8c04-73d14de85a67"
     },
     {
       "name": "Midleton Castle",
       "description": "by Cork",
-      "location": "Midleton",
-      "image": "uploaded.jpeg",
-      "_id": "bdf6d796-2a8d-4b1a-8a55-48728fe0eecd"
+      "latitude": "55",
+      "longitude": "222",
+      "_id": "f2b3d224-85bf-4ac3-baad-22e72844d8e4"
     }
   ],
   "pois": [
