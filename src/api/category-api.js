@@ -47,10 +47,10 @@ export const categoryApi = {
   },
 
   create: {
-   // auth: false, 
-    auth: {
-      strategy: "jwt",
-    },
+   auth: false, 
+   // auth: {
+   //   strategy: "jwt",
+   // },
     handler: async function (request, h) {
       try {
         const category = request.payload;

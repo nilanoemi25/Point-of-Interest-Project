@@ -69,3 +69,9 @@ export const CommentSpecPlus = CommentSpec.keys({
 
 export const CommentArraySpec = Joi.array().items(CommentSpecPlus).label("CommentArray");
 
+export const JwtAuth = Joi.object()
+  .keys({
+    success: Joi.boolean().example("true").required(),
+    token: Joi.string().example("eyJhbGciOiJND.g5YmJisIjoiaGYwNTNjAOhE.gCWGmY5-YigQw0DCBo").required(),
+  })
+  .label("JwtAuth");

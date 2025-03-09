@@ -20,6 +20,14 @@ const swaggerOptions = {
     title: "Point of Interest API",
     version: "0.1",
   },
+  securityDefinitions: {
+    jwt: {
+      type: "apiKey",
+      name: "Authorization",
+      in: "header"
+    }
+  },
+  security: [{ jwt: [] }]
 };
 
 
@@ -50,6 +58,7 @@ async function init() {
       plugin: HapiSwagger,
       options: swaggerOptions,
     },
+    
   ]);
 
   server.auth.strategy("session", "cookie", {
