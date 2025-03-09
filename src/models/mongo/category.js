@@ -4,7 +4,7 @@ const { Schema } = Mongoose;
 
 const categorySchema = new Schema({
   name: String,
-  img: String, 
+  img: String, // for Cloudinary
   userid: {
     type: Schema.Types.ObjectId,
     ref: "User",
