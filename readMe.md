@@ -1,5 +1,3 @@
-https://img.shields.io/badge/noemilovei-red
-
 # Point of Interest Project
 ## Full Stack Dev Assignment 1
 
