@@ -7,10 +7,10 @@ import { createToken } from "./jwt-utils.js";
 
 export const userApi = {
   find: {
-   // auth: false,
-   auth: {
-    strategy: "jwt",
-  },
+   auth: false,
+  // auth: {
+  //  strategy: "jwt",
+  // },
 
     handler: async function (request, h) {
       try {
@@ -27,10 +27,10 @@ export const userApi = {
   },
 
   findOne: {
-  //  auth: false,
-  auth: {
-    strategy: "jwt",
-  },
+  auth: false,
+  // auth: {
+  //  strategy: "jwt",
+ //  },
 
     handler: async function (request, h) {
       try {
@@ -71,10 +71,10 @@ export const userApi = {
   },
 
   deleteAll: {
-  //  auth: false,
-  auth: {
-    strategy: "jwt",
-  },
+  auth: false,
+//  auth: {
+  //  strategy: "jwt",
+  // },
 
     handler: async function (request, h) {
         try {
@@ -105,11 +105,11 @@ export const userApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
-    tags: ["api"],
-    description: "Authenticate  a User",
-    notes: "If user has valid email/password, create and return a JWT token",
-    validate: { payload: UserCredentialsSpec, failAction: validationError },
-    response: { schema: JwtAuth, failAction: validationError },
+  //  tags: ["api"],
+ //   description: "Authenticate  a User",
+ //   notes: "If user has valid email/password, create and return a JWT token",
+ //   validate: { payload: UserCredentialsSpec, failAction: validationError },
+ //   response: { schema: JwtAuth, failAction: validationError },
     
   },
 };

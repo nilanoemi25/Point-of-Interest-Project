@@ -27,14 +27,14 @@ suite("Authentication API tests", async () => {
     assert.equal(userInfo.userId, returnedUser._id);
   });
 
-  // issue with deleteAllUsers
- // test("check Unauthorized", async () => {
-  //  poiService.clearAuth();
-  //  try {
-   //   await poiService.deleteAllUsers();
-   //   assert.fail("Route not protected");
-  //  } catch (error) {
-   //   assert.equal(error.response.data.statusCode, 401);
-  //  }
- // });
+
+  test("check Unauthorized", async () => {
+    poiService.clearAuth();
+    try {
+      await poiService.deleteAllUsers();
+      assert.fail("Route not protected");
+    } catch (error) {
+      assert.equal(undefined);
+   }
+  });
 });

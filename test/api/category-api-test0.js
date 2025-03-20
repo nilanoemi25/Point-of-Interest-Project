@@ -12,8 +12,9 @@ suite("Category API tests", () => {
 
   setup(async () => {
     await poiService.deleteAllCategories();
-    await poiService.deleteAllUsers();
+    // await poiService.deleteAllUsers();
     user = await poiService.createUser(maggie);
+    await poiService.authenticate(maggie);
     categoryHotel.userid = user._id;
   });
 

@@ -13,12 +13,6 @@ export const seedData = {
         email: "homer@simpson.com",
         password: "123456"
       },
-      marge: {
-        firstName: "Marge",
-        lastName: "Simpson",
-        email: "marge@simpson.com",
-        password: "secret"
-      },
       bart: {
         firstName: "Bart",
         lastName: "Simpson",
