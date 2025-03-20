@@ -8,8 +8,8 @@ import { createToken } from "./jwt-utils.js";
 export const userApi = {
   find: {
    auth: false,
-  // auth: {
-  //  strategy: "jwt",
+ //  auth: {
+  // strategy: "jwt",
   // },
 
     handler: async function (request, h) {
@@ -27,10 +27,10 @@ export const userApi = {
   },
 
   findOne: {
-  auth: false,
-  // auth: {
-  //  strategy: "jwt",
- //  },
+ // auth: false,
+   auth: {
+    strategy: "jwt",
+  },
 
     handler: async function (request, h) {
       try {
@@ -73,8 +73,8 @@ export const userApi = {
   deleteAll: {
   auth: false,
 //  auth: {
-  //  strategy: "jwt",
-  // },
+ //   strategy: "jwt",
+ //  },
 
     handler: async function (request, h) {
         try {

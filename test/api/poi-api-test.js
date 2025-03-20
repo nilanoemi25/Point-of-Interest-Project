@@ -8,10 +8,14 @@ suite("Poi API tests", () => {
   let majorCategory = null;
 
   setup(async () => {
+    poiService.clearAuth();
+    user = await poiService.createUser(maggie);
+    await poiService.authenticate(maggie);
     await poiService.deleteAllCategories();
     await poiService.deleteAllUsers();
     await poiService.deleteAllPois();
     user = await poiService.createUser(maggie);
+    await poiService.authenticate(maggie)
     categoryHotel.userid = user._id;
     majorCategory = await poiService.createCategory(categoryHotel);
   });

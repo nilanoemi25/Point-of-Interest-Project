@@ -5,10 +5,10 @@ import { validationError } from "./logger.js";
 
 export const categoryApi = {
   find: {
-   auth: false, 
-  // auth: {
-  //  strategy: "jwt",
-//  },
+ //  auth: false, 
+   auth: {
+    strategy: "jwt",
+   },
     handler: async function (request, h) {
       try {
         const categories = await db.categoryStore.getAllCategories();
@@ -24,10 +24,10 @@ export const categoryApi = {
   },
 
   findOne: {
-   auth: false, 
-  //  auth: {
-   //   strategy: "jwt",
-  //  },
+  // auth: false, 
+   auth: {
+     strategy: "jwt",
+   },
     async handler(request) {
       try {
         const category = await db.categoryStore.getCategoryById(request.params.id);
@@ -47,10 +47,10 @@ export const categoryApi = {
   },
 
   create: {
-   auth: false, 
-   // auth: {
-   //   strategy: "jwt",
-   // },
+  // auth: false, 
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const category = request.payload;
@@ -71,10 +71,10 @@ export const categoryApi = {
   },
 
   deleteOne: {
-   auth: false, 
-   // auth: {
-   //   strategy: "jwt",
-  //  },
+  // auth: false, 
+   auth: {
+     strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const category = await db.categoryStore.getCategoryById(request.params.id);
@@ -93,11 +93,11 @@ export const categoryApi = {
   },
 
   deleteAll: {
-   auth: false, 
+  auth: false, 
    // Implementing JWT strategy here causes tests to fail with 401
- //  auth: {
- //   strategy: "jwt",
- // },
+ // auth: {
+//   strategy: "jwt",
+// },
     handler: async function (request, h) {
       try {
         await db.categoryStore.deleteAllCategories();

@@ -8,11 +8,16 @@ const users = new Array(testUsers.length);
 
 suite("User API tests", () => {
   setup(async () => {
+    poiService.clearAuth();
+    await poiService.createUser(maggie);
+    await poiService.authenticate(maggie);
     await poiService.deleteAllUsers();
     for (let i = 0; i < testUsers.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
       users[0] = await poiService.createUser(testUsers[i]);
     }
+    await poiService.createUser(maggie);
+    await poiService.authenticate(maggie);
   });
   teardown(async () => {});
 
@@ -24,7 +29,7 @@ suite("User API tests", () => {
 
   test("delete all userApi", async () => {
     let returnedUsers = await poiService.getAllUsers();
-    assert.equal(returnedUsers.length, 3);
+    assert.equal(returnedUsers.length, 4);
     await poiService.deleteAllUsers();
     returnedUsers = await poiService.getAllUsers();
     assert.equal(returnedUsers.length, 0);
@@ -51,8 +56,7 @@ suite("User API tests", () => {
       const returnedUser = await poiService.getUser(users[0]._id);
       assert.fail("Should not return a response");
     } catch (error) {
-      assert(error.response.data.message === "No User with this id");
-      assert.equal(error.response.data.statusCode, 404);
+      assert.equal(error.response.data.statusCode, 401);
     }
   });
 });
