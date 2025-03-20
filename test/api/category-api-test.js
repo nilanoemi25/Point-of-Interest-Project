@@ -2,7 +2,7 @@ import { EventEmitter } from "events";
 import { assert } from "chai";
 import { poiService } from "./poi-service.js";
 import { assertSubset } from "../test-utils.js";
-import { maggie, categoryHotel, testCategories } from "../fixtures.js"
+import { maggie, categoryHotel, testCategories, maggieCredentials} from "../fixtures.js"
 
 EventEmitter.setMaxListeners(25);
 
@@ -14,7 +14,7 @@ suite("Category API tests", () => {
     await poiService.deleteAllCategories();
     await poiService.deleteAllUsers();
     user = await poiService.createUser(maggie);
-    await poiService.authenticate(maggie);
+    await poiService.authenticate(maggieCredentials);
     categoryHotel.userid = user._id;
   });
 

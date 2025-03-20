@@ -1,7 +1,7 @@
 import { assert } from "chai";
 import { assertSubset } from "../test-utils.js";
 import { poiService } from "./poi-service.js";
-import { maggie, categoryHotel, testCategories, testPois, singlePoi } from "../fixtures.js";
+import { maggie, categoryHotel, testCategories, testPois, singlePoi, maggieCredentials } from "../fixtures.js";
 
 suite("Poi API tests", () => {
   let user = null;
@@ -10,12 +10,12 @@ suite("Poi API tests", () => {
   setup(async () => {
     poiService.clearAuth();
     user = await poiService.createUser(maggie);
-    await poiService.authenticate(maggie);
+    await poiService.authenticate(maggieCredentials);
     await poiService.deleteAllCategories();
     await poiService.deleteAllUsers();
     await poiService.deleteAllPois();
     user = await poiService.createUser(maggie);
-    await poiService.authenticate(maggie)
+    await poiService.authenticate(maggieCredentials)
     categoryHotel.userid = user._id;
     majorCategory = await poiService.createCategory(categoryHotel);
   });
