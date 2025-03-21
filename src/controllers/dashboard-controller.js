@@ -87,48 +87,45 @@ export const dashboardController = {
   admin: {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
-      const { email } = loggedInUser;
-      const allUsers = await db.userStore.getAdminPrivileges(email);
-      const userIdArray = []
-      // eslint-disable-next-line no-plusplus
-      for(let i=0; i < allUsers.length; i++){
-        userIdArray.push(allUsers[i]._id); 
-      }
-     async function countCategories(userid) {
-        // eslint-disable-next-line prefer-const
-        let categoryArray =  await db.categoryStore.getUserCategories(userid); 
-        // eslint-disable-next-line prefer-const
-        let count = await categoryArray.length;
-        // eslint-disable-next-line prefer-template
-      //  console.log("Count: " + count)
-        return count;
-    }
-    
-    const countArray = [];
-   userIdArray.forEach(async userid => {
-        const count = countCategories(userid);
-        countArray.push(userid, count);
-    });
-    
-    console.log(countArray);
-        
+      const useremail= loggedInUser.email;
+      const userid= loggedInUser._id;
+      const Privileges = await db.userStore.getAdminPrivileges(useremail);
+   //  const countArray = await db.categoryStore.getUserCategories(userid); // gets me the categories of the current user. 
+  //    const test = Object.keys(countArray).length; // counts the current amount of categories 
+  //    console.log(test) // prints current count to screen 
+
+      // get me all users, in a loop get all ids, for each id get me their categories, for each id view the category count
+      const analyticsArray = []
+
+      const allUsersObj = await db.userStore.getAllUsers();
+      Object.keys(allUsersObj).forEach(async key => {
+      const { _id } = allUsersObj[key];
+      const categories = await db.categoryStore.getUserCategories(_id);
+      const countOG =  Object.keys(categories).length;
+     // console.log(countOG)
+      allUsersObj.count = countOG; 
+      console.log(allUsersObj.count)
+      const { email } = allUsersObj[key];
+      analyticsArray.push(email, allUsersObj.count);
+      console.log(analyticsArray)
+      return analyticsArray; // printing email and category count to console.
+      })
+
+  
       let accessString;
-      if(allUsers != null){
+      if(Privileges != null){
         accessString = "Admin Access"
       }
       else{
         accessString = "Access Denied"
       }
 
-      console.log(typeof allUsers); // object
-      
-
       const viewData = {
         title: "Admin Page",
         user: loggedInUser, 
-        allUsers: allUsers,
+        allUsers: Privileges,
         accessString: accessString,
-        count: countArray,
+        analyticsArray: analyticsArray
       
       };
       return h.view("admin-view", viewData);

@@ -50,4 +50,6 @@ export const categoryMongoStore = {
     category.img = updatedCategory.img;
     await category.save();
   },
+
+
 };
