@@ -34,7 +34,7 @@ const swaggerOptions = {
 const result = dotenv.config();
 if (result.error) {
   console.log(result.error.message);
-  process.exit(1);
+//  process.exit(1);
 }
 
 const __filename = fileURLToPath(import.meta.url);
@@ -98,7 +98,7 @@ async function init() {
 
 process.on("unhandledRejection", (err) => {
   console.log(err);
-//  process.exit(1);
+  process.exit(1);
 });
 
 init();
