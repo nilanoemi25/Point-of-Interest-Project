@@ -68,7 +68,7 @@ async function init() {
       isSecure: false,
     },
     redirectTo: "/",
- //   validate: accountsController.validate,
+     validate: accountsController.validate,
   });
   server.auth.default("session");
  
