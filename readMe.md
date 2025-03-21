@@ -20,10 +20,10 @@ The aim of this assignment is to score a high grade and demonstrate good underst
 3. Update env file with your own cookie& password and cloudinary account details
 
 ### Usage Examples
-*admin@admin.com with password admin will allow you access to the admin view. All other accounts will not have permission to the Admin dashboard.
-*Example user homer@simpson.com with password 123456 and pre popualted category and point of interest
-*Once logged in you can create 1. your Category 2. your POI and optionally upload an image to your category
-*All users may contribute to and delete from the comments dashboard
+* admin@admin.com with password admin will allow you access to the admin view. All other accounts will not have permission to the Admin dashboard.
+* Example user homer@simpson.com with password 123456 and pre popualted category and point of interest
+* Once logged in you can create 1. your Category 2. your POI and optionally upload an image to your category
+* All users may contribute to and delete from the comments dashboard
 
 
 ### Swagger Documentation

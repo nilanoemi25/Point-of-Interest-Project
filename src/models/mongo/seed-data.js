@@ -25,6 +25,10 @@ export const seedData = {
       city: {
         name: "Cities",
         userid: "->users.homer"
+      },
+      castle: {
+        name: "Castle",
+        userid: "->users.homer"
       }
     },
     pois: {
@@ -36,6 +40,35 @@ export const seedData = {
         longitude:"8.4756",
         categoryid:"->category.city"
       },
-    }
+      poi_2 : {
+        name: "Waterford",
+        description: "Great Museums",
+        latitude: "52.2593",
+        longitude:"7.1101",
+        categoryid:"->category.city"
+      },
+      poi_3 : {
+        name: "Dublin",
+        description: "Capital City",
+        latitude: "53.3498",
+        longitude:"6.2603",
+        categoryid:"->category.city"
+      },    
+        poi_4 : {
+        name: "Mallow castle",
+        description: "Pretty big castle",
+        latitude: "52.1341",
+        longitude:"8.6392",
+        categoryid:"->category.castle"
+      },
+      poi_5 : {
+        name: "Blackrock Castle",
+        description: "Overlooking the sea",
+        latitude: "51.8999",
+        longitude:"8.4027",
+        categoryid:"->category.castle"
+      },
+    },
+    
   };
   
