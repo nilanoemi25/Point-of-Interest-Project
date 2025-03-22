@@ -63,7 +63,7 @@ async function init() {
 
   server.auth.strategy("session", "cookie", {
     cookie: {
-      name: process.env.COOKIE.NAME,
+      name: process.env.COOKIE_NAME,
       password: process.env.COOKIE.PASSWORD,
       isSecure: false,
     },
