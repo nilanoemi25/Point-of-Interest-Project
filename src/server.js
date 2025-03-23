@@ -64,7 +64,7 @@ async function init() {
   server.auth.strategy("session", "cookie", {
     cookie: {
       name: process.env.COOKIE_NAME,
-      password: process.env.COOKIE.PASSWORD,
+      password: process.env.COOKIE_PASSWORD,
       isSecure: false,
     },
     redirectTo: "/",
@@ -73,7 +73,7 @@ async function init() {
   server.auth.default("session");
  
   server.auth.strategy("jwt", "jwt", {
-    key: process.env.cookie.password,
+    key: process.env.cookie_password,
     validate: validate,
     verifyOptions: { algorithms: ["HS256"] }
   });

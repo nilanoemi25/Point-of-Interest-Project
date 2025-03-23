@@ -104,13 +104,14 @@ export const dashboardController = {
       const countOG =  Object.keys(categories).length;
      // console.log(countOG)
       allUsersObj.count = countOG; 
-      console.log(allUsersObj.count)
+    //  console.log(allUsersObj.count)
       const { email } = allUsersObj[key];
       analyticsArray.push(email, allUsersObj.count);
-      console.log(analyticsArray)
-      return analyticsArray; // printing email and category count to console.
+    //  console.log(analyticsArray)
+     // return analyticsArray; // printing email and category count to console.
       })
 
+      console.log(analyticsArray)
   
       let accessString;
       if(Privileges != null){
