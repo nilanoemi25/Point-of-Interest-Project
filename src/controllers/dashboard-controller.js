@@ -107,7 +107,7 @@ export const dashboardController = {
     //  console.log(allUsersObj.count)
       const { email } = allUsersObj[key];
       analyticsArray.push(email, allUsersObj.count);
-    //  console.log(analyticsArray)
+      console.log(analyticsArray)
      // return analyticsArray; // printing email and category count to console.
       })
 
