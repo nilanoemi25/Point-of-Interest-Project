@@ -5,10 +5,10 @@ import { validationError } from "./logger.js";
 
 export const categoryApi = {
   find: {
- //  auth: false, 
-   auth: {
-    strategy: "jwt",
-   },
+  auth: false, 
+ //  auth: {
+ //   strategy: "jwt",
+//   },
     handler: async function (request, h) {
       try {
         const categories = await db.categoryStore.getAllCategories();
@@ -18,16 +18,16 @@ export const categoryApi = {
       }
     },
     tags: ["api"],
-    response: { schema: CategoryArraySpec, failAction: validationError },
+   // response: { schema: CategoryArraySpec, failAction: validationError },
     description: "Get all categories",
     notes: "Returns all categories",
   },
 
   findOne: {
-  // auth: false, 
-   auth: {
-     strategy: "jwt",
-   },
+   auth: false, 
+ //  auth: {
+ //    strategy: "jwt",
+ //  },
     async handler(request) {
       try {
         const category = await db.categoryStore.getCategoryById(request.params.id);
@@ -42,15 +42,15 @@ export const categoryApi = {
     tags: ["api"],
     description: "Find a Category",
     notes: "Returns a category",
-    validate: { params: { id: IdSpec }, failAction: validationError },
+  //  validate: { params: { id: IdSpec }, failAction: validationError },
     response: { schema: CategorySpecPlus, failAction: validationError },
   },
 
   create: {
-  // auth: false, 
-    auth: {
-      strategy: "jwt",
-    },
+  auth: false, 
+  // auth: {
+  //    strategy: "jwt",
+  //  },
     handler: async function (request, h) {
       try {
         const category = request.payload;
@@ -71,10 +71,10 @@ export const categoryApi = {
   },
 
   deleteOne: {
-  // auth: false, 
-   auth: {
-     strategy: "jwt",
-    },
+   auth: false, 
+ //  auth: {
+  //   strategy: "jwt",
+  //  },
     handler: async function (request, h) {
       try {
         const category = await db.categoryStore.getCategoryById(request.params.id);

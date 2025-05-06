@@ -31,6 +31,8 @@ export const webRoutes = [
 
   { method: "POST", path: "/category/{id}/uploadimage", config: categoriesController.uploadImage },
 
-  { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } }
+  { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
+
+  
 
 ];
